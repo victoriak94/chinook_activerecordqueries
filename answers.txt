@@ -1,0 +1,52 @@
+
+
+Find the albums recorded by the artist Queen.
+  Artist.find_by(name: 'Queen')
+  id: 51
+	Album.where(artist_id: 51)
+  Greatest Hits II
+  Greatest Hits I
+  News of the World
+
+Count how many tracks belong to the media type "Protected MPEG-4 video file".
+  MediaType.find_by(name: 'Protected MPEG-4 video file')
+  id: 3
+  Track.where(media_type_id: 3).count
+  214
+
+Find the genre with the name "Hip Hop/Rap".
+  Genre.find_by(name: 'Hip Hop/Rap')
+  id: 17
+
+Count how many tracks belong to the "Hip Hop/Rap" genre
+  Track.where(genre_id: 17).count
+  35
+
+Find the total amount of time required to listen to all the tracks in the database.
+  Track.sum('milliseconds')
+  1378575827
+
+Find the highest price of any track that has the media type "MPEG audio file".
+  MediaType.where(name: "MPEG audio file")
+  id: 1
+  Track.where(media_type_id: 1).order(unit_price: :desc).first
+  unit_price: 0.99e0
+
+Find the name of the most expensive track that has the media type "MPEG audio file".
+  Track.where(media_type_id: 1).order(unit_price: :desc).first.name
+  "Put the Finger on You"
+
+Find the 2 oldest artists.
+  Artist.order(created_at: :asc).limit(2)
+  id: 258
+  id: 31
+
+Find the least expensive track that has the genre "Electronica/Dance".
+  Genre.find_by(name: 'Electronica/Dance')
+  id: 15
+	Track.where(genre_id: 15).order(unit_price: :asc).first
+  track id: 3319
+  Instincto Collectivo
+
+Find all "MPEG autio file" tracks in the genre "Electronica/Dance".
+  Track.where(media_type_id: 1).where(genre_id: 15)
